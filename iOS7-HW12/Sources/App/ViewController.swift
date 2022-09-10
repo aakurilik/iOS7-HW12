@@ -10,7 +10,7 @@ import SnapKit
 
 class ViewController: UIViewController {
 
-    // MARK: - Outlets
+    // MARK: - Elements
 
     private let screenSize: CGRect = UIScreen.main.bounds
     private let width = UIScreen.main.bounds.width
@@ -99,13 +99,17 @@ class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = UIColor(red: 254/255, green: 249/255, blue: 231/255, alpha: 1)
+        setupView()
         setupHierarchy()
-        setupLayout()
         makeShapeLayer()
+        setupLayout()
     }
 
     // MARK: - Setup
+
+    private func setupView() {
+        view.backgroundColor = UIColor(red: 254/255, green: 249/255, blue: 231/255, alpha: 1)
+    }
 
     private func setupHierarchy() {
         view.addSubviews([
@@ -262,10 +266,10 @@ class ViewController: UIViewController {
         buttonReset.alpha = 0.5
         timer.invalidate()
         timeCounter = workTime
-        labelTimer.text = formatTimer()
         let image = UIImage(systemName: "playpause.fill")
         buttonStart.setImage(image, for: .normal)
         buttonStart.tintColor = UIColor.black
+        labelTimer.text = formatTimer()
         labelTimer.textColor = UIColor.systemGray
         trackLayer.strokeColor = UIColor.systemRed.cgColor
         isWorkTime = true
@@ -318,13 +322,5 @@ class ViewController: UIViewController {
             isWorkTime = false
         }
         isStarted = false
-    }
-}
-
-// MARK: - Extensions
-
-extension UIView {
-    func addSubviews(_ subviews: [UIView]) {
-        subviews.forEach { addSubview($0) }
     }
 }
